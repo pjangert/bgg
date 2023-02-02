@@ -1,5 +1,4 @@
 <?php
-//$DEBUG="Y";
 session_start();
 require_once("includes/common.php");
 require_once("includes/dbinfo.php");
@@ -16,6 +15,7 @@ start_page(array($title, $main_style, $nav_style, $query_hdr));
 <span class='buffer'>&nbsp;</span><span class='result' id='gameResult'>
 <?php
 $link = new mysqli($db_host, $ro_login, $ro_pw, $gamedb, $db_port);
+if ($DEBUG >= 1) { echo "<p>Host: {$db_host}, DB: {$gamedb}, Port: {$db_port}</p>";}
 if (!$link)
 	echo "<p class='error'>Error retriving information: {$link->error}</p>\n";
 else
