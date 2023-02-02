@@ -1,4 +1,5 @@
 <?php
+require_once("debug.php");
 class header_item
 {
 	public $type;
