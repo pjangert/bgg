@@ -1,0 +1,10 @@
+.wodnav { color: #040860; }
+.requiemnav { color: #601010; }
+.lostnav { color: #006000; }
+.nav { float: left; /*height: 100%; min-height: 100%;*/ width: 9em; margin-right: 1ex; padding-right: 1ex; border-right: 1pt solid #BBBBBB; margin-top: 3em; position: fixed; }
+.navcontent { background: #404040; height: auto; margin: 0; padding: 0; padding-bottom: 1ex; border: 0; } /* border-right: 1pt solid #BBBBBB;; } /*padding-right: 1ex; position: fixed; width: 9em;  }*/
+.navcontent ul { /*list-style: outside;*/ list-style-type: none; margin: 0; padding: 0; }
+.navcontent li { padding-left: 0.5ex; margin-left: 0.5ex; padding-top: 0.5ex; margin-top: 0.5ex; padding-right: 0.5ex; }
+.navcontent li ul { list-style: none; line-height: 0; }
+.navcontent li.sub, div.nav li ul li { padding-left: 0.5em; padding-top: 5px; margin-top: 0; }
+.navcontent hr { height: 1px; border: none; }

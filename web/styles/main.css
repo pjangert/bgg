@@ -1,0 +1,43 @@
+a:link { color: #A0A0F0; }
+a:visited { color: #A0A0F0; }
+html,body { background: #101080; color: #C0C0C0; height: auto; margin: 0; padding: 0; /*width: 100%; min-width: 800px;*/ line-height: 100%; }
+h1 { font: bold 175% Times, serif; text-align: center; margin-bottom: 0; }
+h2 { font: bold 150% Times, serif; text-align: center; margin-bottom: 0; }
+h3 { font: bold 125% Times, serif; text-align: center; margin-bottom: 0; }
+h4 { font: bold 110% Times, serif; text-align: left; margin-bottom: 0; }
+h5 { font: bold 100% Times, serif; text-align: left; margin-bottom: 0; }
+h6 { font: bold 75% Times, serif; text-align: left; margin-bottom: 0; }
+p,li { font: 100% Arial, sans-serif; text-align: left; }
+p.follow { margin-top: 0; padding-top: 0; margin-bottom: 0; }
+.error { color: #dd2222; text-align: center; font-weight: bold; }
+.center { text-align: center; }
+table { background: transparent; color: #CC0000; padding: 0pt; margin: 0pt; border-collapse: collapse; }
+table.normal { background: transparent; color: #CC0000; width: 70%; text-align: center; border-style: none; font-family: Arial, sans-serif; }
+table.fixed-size { table-layout: fixed; }
+table.fixed-size td { max-width: 200px; word-wrap: normal; }
+table.update { background: transparent; color: #CC0000; text-align: center; border-style: none; font-family: Arial, sans-serif; }
+table.update td { padding: 3pt; }
+tr:nth-child(odd) { background-color: rgba(96,96,96,.5); }
+tr:nth-child(even) { background: transparent; }
+th { background: #606060; color: #60B0F0; }
+td { background: transparent; color: #A0A0A0; margin: 0pt; padding: 0pt 2pt; border-style: none; } /* border-top: 1pt dashed; }*/
+.sans { font-family: Arial, sans-serif; }
+/* td a { font-family: Arial, sans-serif; } */
+tr { text-align: center; vertical-align: middle; margin: 0pt; padding: 0pt; border: 0pt; }
+hr { color: #BBBBBB; background-color: #BBBBBB; height: 2px; margin: 1ex 1em 1ex 1em; border: none; }
+div { padding: 0; margin: 0; border: 0; /*display: table;*/ }
+div.result { align: center; text-align: center; }
+div.center_text { text-align: center; }
+div.center { align: center; }
+div.center table { margin: 0 auto; }
+div.page { /*height: 100%; width: 70em; width: 100%; position: relative; overflow-x: scroll;*/ }
+div.container { height: 100%; /*width: 100%; background: #666666; border: 1pt solid black;*/ }
+div.content { /*height: 100%; padding: 0 1ex; margin-left: 10em; /*float: right; margin-right: 10px; background: #666666;*/ float: left; position: relative; margin-left: 10em;}
+span.crossout { text-decoration: line-through; }
+span.blink { text-decoration: blink; }
+span.red { color: #CC0000; }
+span.result { width: 80%; align: center; float: left; }
+/*span.result { width: 100%; text-align: center; float: left; }*/
+span.buffer { width: 10%; text-align: center; float: left; }
+span p,p.indented { font: 100% Arial, sans-serif; color: #A0A0A0; padding-left: 2em; }
+div.updated { margin-bottom: 0em; padding: 0em; /*clear: both;*/ }
