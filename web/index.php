@@ -1,5 +1,5 @@
 <?php
-//$DEBUG="Y";
+require_once("includes/debug.php");
 require_once("includes/common.php");
 $title = new header_item("title","Game Library");
 start_page(array($title,$main_style, $nav_style));
