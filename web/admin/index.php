@@ -9,22 +9,22 @@ else
 		require_once "includes/dbinfo.php";
 		$username = $_REQUEST['login'];
 		$link = new mysqli($db_host, $ro_login, $ro_pw, $gamedb, $db_port);
-		if ($DEBUG >= 2) { echo "<p>host: {$db_host}, login {$ro_login}, DB, {$gamedb}, port {$db_port}</p>"; }
+		if ($DEBUG >= 1) { echo "<p>host: {$db_host}, login {$ro_login}, DB, {$gamedb}, port {$db_port}</p>"; }
 		if (!$link) { echo "<h1>Error occurred: {$link->error}</h1>"; die; }
 		$query = "select * from user_login where username='{$username}'";
 		$result = $link->query($query);
 		if (!$result) { echo "<h1>Error in query: {$link->error}</h1>"; die; }
 		$pass_test = $result->fetch_assoc();
-		$DEBUG >= 1 && my_show(var_dump($pass_test));
+		if ($DEBUG >= 3) {my_show(var_dump($pass_test));}
 		if (MD5($_REQUEST['creds']) == $pass_test['password'])
 		{
 			foreach ($pass_test as $field_name => $field_value)
 			{
 				if ($field_name == "username") {$_SESSION[$field_name] = $field_value; }
 				elseif ($field_name != "password") {$_SESSION[$field_name] = ($field_value == "Y") ; }
-				$DEBUG >= 1 && my_show($field_name . "-" . $field_value);
+				$DEBUG >= 2 && my_show($field_name . "-" . $field_value);
 			}
-			if ($DEBUG >= 2) {my_show(var_dump($_SESSION)); die;}
+			if ($DEBUG >= 2) {my_show(var_dump($_SESSION)); if ($DEBUG >= 3) {die;}}
 			$_SESSION['failed'] = false;
 			header("Location: admin.php");
 		}
