@@ -147,9 +147,13 @@ function start_page($header_info = NULL)
 	echo "<!DOCTYPE html>\n<html>\n<head>\n<meta charset='UTF-8'>\n";
 	if (isset($header_info))
 	{
+		if ($DEBUG >= 1) 
+			my_show(var_dump($header_info));
 		foreach ($header_info as $header)
 		{
-			if ($header->type == "stylesheet")
+			if (!isset($header->type))
+				echo "Unset header type: " . my_show(var_dump($header));
+			elseif ($header->type == "stylesheet")
 				echo "<link rel='{$header->type}' href='{$header->source}' />\n";
 			elseif ($header->type == "title")
 				echo "<title>{$header->source}</title>\n";
