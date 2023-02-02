@@ -9,6 +9,7 @@ else
 		require_once "includes/dbinfo.php";
 		$username = $_REQUEST['login'];
 		$link = new mysqli($db_host, $ro_login, $ro_pw, $gamedb, $db_port);
+		if ($DEBUG >= 2) { echo "<p>host: {$db_host}, login {$ro_login}, DB, {$gamedb}, port {$db_port}</p>"; }
 		if (!$link) { echo "<h1>Error occurred: {$link->error}</h1>"; die; }
 		$query = "select * from user_login where username='{$username}'";
 		$result = $link->query($query);
