@@ -150,10 +150,12 @@ function start_page($header_info = NULL)
 	{
 		if ($DEBUG >= 1) 
 			my_show(var_dump($header_info));
+		$head_count = 0;
 		foreach ($header_info as $header)
 		{
+			$head_count++;
 			if (!isset($header->type))
-				echo "Unset header type: " . my_show(var_dump($header));
+				echo "Unset header type (count: {$head_count}): " . my_show(var_dump($header));
 			elseif ($header->type == "stylesheet")
 				echo "<link rel='{$header->type}' href='{$header->source}' />\n";
 			elseif ($header->type == "title")

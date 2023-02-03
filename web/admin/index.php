@@ -1,4 +1,6 @@
 <?php
+ini_set('session.dc.max_lifetime', 3600);
+session_set_cookie_params(3600);
 session_start();
 require_once "includes/debug.php";
 if (isset($_SESSION['username'])) { header("Location: admin.php"); }

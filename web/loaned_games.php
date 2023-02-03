@@ -4,7 +4,7 @@ require_once("includes/common.php");
 require_once("includes/dbinfo.php");
 $title = new header_item("title","Games Curently on Loan");
 //$query_hdr = new header_item("function", $query_func);
-start_page(array($title, $main_style, $nav_style, $query_hdr));
+start_page(array($title, $main_style, $nav_style)); //, $query_hdr));
 ?>
 <div class='container'>
 <?php include("includes/nav.php"); ?>
