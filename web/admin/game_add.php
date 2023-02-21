@@ -26,7 +26,6 @@ if ($_SESSION['add_game'])
 			$ffield = $field_info->name;
 			if ($$ffield == null)
 				$query .= "null";
-			//my_show($ffield . " - " . var_dump($$ffield));
 			else
 				$query .= "'{$$ffield}'";
 			if ($counter++ < $field_count)

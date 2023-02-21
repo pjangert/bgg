@@ -1,5 +1,4 @@
 <?php
-$DEBUG="";
 require_once("includes/verify.php");
 require_once("includes/common.php");
 $query_func='function submitName()
@@ -7,7 +6,9 @@ $query_func='function submitName()
 	game_name=document.getElementById("game_name").value;
 	result_location=document.getElementById("gameResult");
 	if (game_name=="") {result_location.innerHTML=""; return;}
-	if (document.getElementById("exact_name").checked) { game_name+="&exact=1"; }
+	exact_match=(document.getElementById("exact_name").checked) ? "Y" : "";
+	show_pics=(document.getElementById("show_pics").checked) ? "Y" : "N";
+	sendURL=encodeURI("lookup.php?game_name="+game_name+"&exact="+exact_match+"&show_pics="+show_pics);
 	if (window.XMLHttpRequest){ xmlhttp=new XMLHttpRequest(); }
 	else { xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); }
 	xmlhttp.onreadystatechange=function() {
@@ -17,7 +18,7 @@ $query_func='function submitName()
 		else if (xmlhttp.readyState==3) { result_location.innerHTML="<p class=\"center\">Retrieving Data</p>";}
 		else { result_location.innerHTML="<p class=\"center\">State: "+xmlhttp.readyState+" received</p>"; }
 	}
-	xmlhttp.open("GET","lookup.php?game_name="+game_name,true);
+	xmlhttp.open("GET",sendURL,true);
 	xmlhttp.send();
 }
 ';
@@ -31,7 +32,10 @@ include_once("includes/nav.php");
     <h1>Search for Games to Add from BGG</h1>
     <hr />
     <div class='center'>
-    <p class='center'>Game Name: <input type='text' id='game_name' /> Exact Name? <input type='checkbox' id='exact_name' value='Y'><input type='button' value='Search Games' onClick='submitName();' /></p>
+    <p class='center'>Game Name: <input type='text' id='game_name' /></p>
+    <p class='center'>Exact Name? <input type='checkbox' id='exact_name' value='Y' /><br />Show images for matches<input type='checkbox' id='show_pics' value='Y' checked /></p>
+    <p class='center'>Note: this will cause issues when many games are returned, <br />pictures will automatically be disabled if more than <?=$max_games_return?> games match</p>
+    <p class='center'><input type='button' value='Search Games' onClick='submitName();' /></p>
     <script>
     document.getElementById("game_name").addEventListener("keyup", function(e) {
       if (e.key === "Enter" ) { e.preventDefault(); submitName(); }

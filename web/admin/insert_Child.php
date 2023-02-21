@@ -25,7 +25,6 @@ if (!$parent_info || $parent_info['parent_id'] == null)
 	goto end;
 }
 
-//echo "<pre>{${var_dump($parent_info)}} - {$parent_info['bgg_id']}</pre>";
 if ($min_players >= $parent_info['min_players']) { $min_players = "NULL"; }
 if ($max_players <= $parent_info['max_players']) { $max_players = "NULL"; }
 $parent_id = $parent_info['parent_id'];

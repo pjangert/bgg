@@ -4,8 +4,6 @@ if (!$link) { header("Location: {${urlencode($_SERVER['HTTP_REFERER'])}}"); }
 foreach($_REQUEST as $rfield => $rvalue) {$$rfield = $link->escape_string($rvalue);}	
 if ($_SESSION['edit_game'] )
 {
-	//my_show(var_dump($_REQUEST));
-
 	$check_query = "select * from expansion_info where exp_id = {$exp_id}";
 	$exist_check = $link->query($check_query);
 	if (!$exist_check)

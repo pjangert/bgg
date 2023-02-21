@@ -14,8 +14,6 @@ for ($i=0;$i<count($field_list);$i++)
 		break;
 	case "password":
 		$curr_field->value = "";
-		/*my_show(var_dump($curr_field));*/
-		$test=$curr_field->show();
 		if ($curr_rec_edit)
 			echo "        <td>{$curr_field->show()}</td>\n";
 		else

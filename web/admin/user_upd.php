@@ -3,7 +3,6 @@ if (!isset($_SESSION['username'])) { header("Location: ../"); }
 if (!$link) { header("Location: {${urlencode($_SERVER['HTTP_REFERER'])}}"); }
 if ($_SESSION['edit_user'])
 {
-	//my_show(var_dump($_REQUEST));
 	foreach($_REQUEST as $rfield => $rvalue) {$$rfield = $link->escape_string($rvalue);}	
 	$password = MD5($_REQUEST['password']);
 
@@ -23,7 +22,6 @@ if ($_SESSION['edit_user'])
 		$counter = 1;
 		foreach($all_fields as $field_info)
 		{
-			//my_show(var_dump($field_info));
 			$ffield = $field_info->name;
 			if ($ffield != "username")
 			{

@@ -11,22 +11,18 @@ else
 		require_once "includes/dbinfo.php";
 		$username = $_REQUEST['login'];
 		$link = new mysqli($db_host, $ro_login, $ro_pw, $gamedb, $db_port);
-		if ($DEBUG >= 1) { echo "<p>host: {$db_host}, login {$ro_login}, DB, {$gamedb}, port {$db_port}</p>"; }
-		if (!$link) { echo "<h1>Error occurred: {$link->error}</h1>"; die; }
+		if (!$link) { echo "<h1>Error occurred: {$link->error}</h1>"; debug_show(1, "<p>host: {$db_host}, login {$ro_login}, DB, {$gamedb}, port {$db_port}</p>"); die; }
 		$query = "select * from user_login where username='{$username}'";
 		$result = $link->query($query);
 		if (!$result) { echo "<h1>Error in query: {$link->error}</h1>"; die; }
 		$pass_test = $result->fetch_assoc();
-		if ($DEBUG >= 3) {my_show(var_dump($pass_test));}
 		if (MD5($_REQUEST['creds']) == $pass_test['password'])
 		{
 			foreach ($pass_test as $field_name => $field_value)
 			{
 				if ($field_name == "username") {$_SESSION[$field_name] = $field_value; }
 				elseif ($field_name != "password") {$_SESSION[$field_name] = ($field_value == "Y") ; }
-				$DEBUG >= 2 && my_show($field_name . "-" . $field_value);
 			}
-			if ($DEBUG >= 2) {my_show(var_dump($_SESSION)); if ($DEBUG >= 3) {die;}}
 			$_SESSION['failed'] = false;
 			header("Location: admin.php");
 		}
@@ -38,17 +34,17 @@ else
 }
 $verify = "function verify()
 {
-  if (Login.username.value == '')
+  if (document.getElementById('username').value == '')
   {
      alert('Username cannot be blank');
      return false;
   }
-  if (Login.password.value == '')
+  if (document.getElementById('password').value == '')
   {
      alert('Password cannot be blank');
      return false;
   }
-  submit();
+  return true;
 }";
 require_once "includes/common.php";
 $title = new header_item("title","Admin Login");
@@ -56,12 +52,11 @@ $verify_function = new header_item("script", $verify);
 start_page(array($title, $main_style, $nav_style, $verify_function));
 ?>
 <div class='container'>
-<? if($DEBUG >= 1) my_show("$gamedb"); ?>
 <?php include_once "includes/nav.php"; ?>
 <div class='content'>
 <h1>Game Library Admin Login</h1>
 <br>
-<form name='Login' action='<?= $_SERVER['PHP_SELF']?>' method='POST' onSubmit='verify(); return false;'>
+<form name='Login' action='<?= $_SERVER['PHP_SELF']?>' method='POST' onSubmit='verify();'>
 <table>
 <?php
 if (isset($_SESSION['failed']) && $_SESSION['failed'])
@@ -72,11 +67,11 @@ if (isset($_SESSION['failed']) && $_SESSION['failed'])
 ?>
 <tr>
   <td>Username</td>
-  <td><input name='login' type='text' size=16 maxlength=16 /></td>
+  <td><input name='login' id='username' type='text' size=16 maxlength=16 /></td>
 </tr>
 <tr>
   <td>Password</td>
-  <td><input name='creds' type='password' size=16 maxlength=16 /></td>
+  <td><input name='creds' id='password' type='password' size=16 maxlength=16 /></td>
 </tr>
 <tr>
   <td colspan='2'><input type='submit' value='Login' /></td>

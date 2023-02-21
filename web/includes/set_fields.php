@@ -24,7 +24,6 @@ for ($i=0;$i<$item_list->field_count;$i++)
 		else
 		{
 			$curr_item->type = "text";
-			//my_show(var_dump($field_length));
 			$curr_item->length = $field_length;
 		}
 	}

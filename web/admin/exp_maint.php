@@ -144,7 +144,7 @@ while ($curr_array = $item_list->fetch_assoc())
 	{
 		echo "        <td class='sans'><a href='javascript:setUpdate(\"{$curr_array['exp_id']}\");'>Edit Expansion</a>\n";
 		if ($_SESSION['edit_game'])
-			echo "        <br /><a href='javascript:setDelete(\"{$curr_array['exp_id']}\",\"{$curr_array['exp_name']}\");'>Delete Expansion</a>\n";
+			echo "        <br /><br /><a href='javascript:setDelete(\"{$curr_array['exp_id']}\",\"{$curr_array['exp_name']}\");'>Delete Expansion</a>\n";
 		echo "        </td>\n";
 	}
 	else

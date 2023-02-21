@@ -1,9 +1,7 @@
 <?php
-$DEBUG = 0;
 require_once ("includes/verify.php");
 require_once ("includes/common.php");
 include_once ("includes/dbinfo.php");
-//my_show(var_dump($_SESSION));
 $title = new header_item("title","Game Library Admin");
 start_page(array($title, $main_style, $nav_style));
 if (isset($_SESSION['ins_error'])) {$ins_error = $_SESSION['ins_error']; unset($_SESSION['ins_error']); }
@@ -19,7 +17,7 @@ if (isset($ins_error) && $ins_error != "") {echo "<p class='error'>{$ins_error}<
 if (isset($ins_message) && $ins_message != "") {echo "<p class='error'>{$ins_message}</p>\n";}
 echo "<h3>Database Options for {$_SESSION['username']}</h3>
 ";
-$DEBUG == 1 && my_show(var_dump($_SESSION));
+debug_show(1, var_export($_SESSION, true));
 $add_game = $_SESSION['add_game'];
 $edit_game = $_SESSION['edit_game'];
 $edit_loan = $_SESSION['edit_loan'];
