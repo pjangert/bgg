@@ -48,16 +48,16 @@
       $result = $link->query("select bgg_id from game_info where bgg_id = {$bgg_id} union select bgg_id from expansion_info where bgg_id = {$bgg_id}");
       if (!$result) { echo "<p>Failed to check record: {$link->error}</p>"; }
     }
-  	if (isset($result))
-  	{
-	    $game_check = $result->fetch_assoc();
+    if (isset($result))
+    {
+      $game_check = $result->fetch_assoc();
 
-    	if (isset($result) && $game_check['bgg_id'] != null) 
-    	{
-    		$processed++;
-    		///echo "<p>{$game_name} is already in database</p>\n"; $result->close(); echo "<hr />\n"; 
-    	}
-    	else 
+      if (isset($result) && $game_check['bgg_id'] != null) 
+      {
+        $processed++;
+        ///echo "<p>{$game_name} is already in database</p>\n"; $result->close(); echo "<hr />\n"; 
+      }
+      else 
       { 
         $specific_query = "{$bgg_url}thing?id=$bgg_id";
         $xml_start_time= microtime(true);
@@ -76,32 +76,32 @@
           $name_search = $info_response->xpath('item/name');
           foreach ($name_search as $name_node)
           {
-  	        if ($name_node['type'] == "primary") { $game_name = str_replace(html_entity_decode('&ndash;',ENT_COMPAT, 'UTF-8'), '-', $name_node['value']); }
+            if ($name_node['type'] == "primary") { $game_name = str_replace(html_entity_decode('&ndash;',ENT_COMPAT, 'UTF-8'), '-', $name_node['value']); }
           }
           $min_players = $info_response->item->minplayers['value'];
           $max_players = $info_response->item->maxplayers['value'];
           if ($info_response->item['type'] == 'boardgame')
           {
             $parent = "Parent";
-  	        $insert_parent="";
-  	        $game_table="game_info";
+            $insert_parent="";
+            $game_table="game_info";
           }
           else
           {
             $parent_id = "";
-  	        $insert_parent = "";
+            $insert_parent = "";
             $parent = "Child";
-        	  $game_table="expansion_info";
-        	  $parent_search = $info_response->xpath('item/link');
-        	  while(list(,$node) = each($parent_search))
-        	  {
-        	    if ($node['inbound'] == "true")
-        	    {
+            $game_table="expansion_info";
+            $parent_search = $info_response->xpath('item/link');
+            while(list(,$node) = each($parent_search))
+            {
+              if ($node['inbound'] == "true")
+              {
                 $parent_id = $node['id'];
-        	      if ($insert_parent == "") { $insert_parent="$parent_id"; }
-        	      else { $insert_parent .=",$parent_id"; }
-      	      }
-        	  }
+                if ($insert_parent == "") { $insert_parent="$parent_id"; }
+                else { $insert_parent .=",$parent_id"; }
+              }
+            }
           }
           $proc_end_time= microtime(true);
           $fields = array('bgg_id' => (string)$bgg_id, 'game_name' => $game_name, 'min_players' => (string)$min_players, 'max_players' => (string)$max_players);
@@ -109,23 +109,23 @@
           $post_fields = http_build_query($fields);
           $url_conn = curl_init();
           $final_url = "http://localhost" . dirname($_SERVER['REQUEST_URI']) . "/mass_{$parent}.php?{$post_fields}";
-      	  //my_show($final_url);
+          //my_show($final_url);
           curl_setopt($url_conn, CURLOPT_URL, $final_url);
           curl_setopt($url_conn, CURLOPT_FRESH_CONNECT, true);
-  	      curl_setopt($url_conn, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($url_conn, CURLOPT_RETURNTRANSFER, true);
           $url_res = curl_exec($url_conn);
-  	      $error = curl_error($url_conn);
+          $error = curl_error($url_conn);
           curl_close($url_conn);
           if ($error != "" || $url_res != "" ) 
           {
-     		    if ($error != "" ) 
-     			    echo "<p class='error'>Error: {$error} </p>\n"; 
-       		  else
-       			  echo "<p class='error'>{$url_res}</p>\n";
-       	  }
+             if ($error != "" ) 
+               echo "<p class='error'>Error: {$error} </p>\n"; 
+             else
+               echo "<p class='error'>{$url_res}</p>\n";
+           }
           else { echo "<p>{$game_name} Added to database</p>\n"; $insert_count++; $processed++;}
         }
-      	debug_show(2, "<p>Times: ". sprintf("get XML: %f, search XML: %f",$xml_end_time - $xml_start_time, $proc_end_time - $proc_start_time) ."</p>");
+        debug_show(2, "<p>Times: ". sprintf("get XML: %f, search XML: %f",$xml_end_time - $xml_start_time, $proc_end_time - $proc_start_time) ."</p>");
       }
     }
   }
