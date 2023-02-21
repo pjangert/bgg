@@ -1,5 +1,4 @@
 <?php
-$DEBUG = 0;
 require_once "includes/verify.php";
 require_once "includes/common.php";
 require_once "includes/dbinfo.php";
