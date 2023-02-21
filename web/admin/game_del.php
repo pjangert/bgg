@@ -4,9 +4,6 @@ if (!$link) { header("Location: {${urlencode($_SERVER['HTTP_REFERER'])}}"); }
 foreach($_REQUEST as $rfield => $rvalue) {$$rfield = $link->escape_string($rvalue);}	
 if ($_SESSION['edit_game'] ) { do
 {
-
-	//my_show(var_dump($_REQUEST));
-
 	$check_query = "select * from game_info where game_id = {$game_id}";
 	$exist_check = $link->query($check_query);
 	if (!$exist_check)
@@ -46,7 +43,6 @@ if ($_SESSION['edit_game'] ) { do
 		}
 		$query = "delete from game_info where game_id = {$game_id}";
 		if (!$link->query($query))
-		//if (!my_show($query))
 		{
 			$ins_message = $link->error;
 			$ins_error = "Error deleting {$game_id} <br /> {$query}";

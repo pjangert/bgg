@@ -8,7 +8,6 @@ if ($link->connect_errno)
        	$_SESSION['ins_message'] = $link->connect_error;
 	//header ("Location: admin.php");
 }
-//echo "<pre>".var_dump($_REQUEST)."</pre>";
 foreach($_REQUEST as $rfield => $rvalue) {$$rfield = $rvalue; }
 
 $query = "insert into game_info (bgg_id, game_name, min_players, max_players) values ({$bgg_id}, '{$link->real_escape_string($game_name)}', {$min_players}, {$max_players})";

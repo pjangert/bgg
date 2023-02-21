@@ -23,7 +23,7 @@ th { background: #606060; color: #60B0F0; }
 td { background: transparent; color: #A0A0A0; margin: 0pt; padding: 0pt 2pt; border-style: none; } /* border-top: 1pt dashed; }*/
 .sans { font-family: Arial, sans-serif; }
 /* td a { font-family: Arial, sans-serif; } */
-tr { text-align: center; vertical-align: middle; margin: 0pt; padding: 0pt; border: 0pt; }
+tr { text-align: center; vertical-align: middle; margin: 0pt; padding: 0pt; border: 0pt; margin-top: 1ex; }
 hr { color: #BBBBBB; background-color: #BBBBBB; height: 2px; margin: 1ex 1em 1ex 1em; border: none; }
 div { padding: 0; margin: 0; border: 0; /*display: table;*/ }
 div.result { align: center; text-align: center; }

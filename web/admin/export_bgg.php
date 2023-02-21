@@ -13,7 +13,11 @@ function pushGames()
 	if (window.XMLHttpRequest){ xmlhttp=new XMLHttpRequest();}
 	else { xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); }
 	xmlhttp.onreadystatechange=function() {
-		document.getElementById("generate").innerHTML=xmlhttp.responseText;
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) { result_location.innerHTML=xmlhttp.responseText; }
+		else if (xmlhttp.readyState==4 && xmlhttp.status!=200) { result_location.innerHTML="<p class=\"center\">Error occurred:"+xmlhttp.statusText+"</p>"; }
+		else if (xmlhttp.readyState==1) { result_location.innerHTML="<p class=\"center\">Request Sent - this will take a moment</p>";}
+		else if (xmlhttp.readyState==3) { result_location.innerHTML="<p class=\"center\">Processing Data</p>";}
+		else { result_location.innerHTML="<p class=\"center\">State: "+xmlhttp.readyState+" received</p>"; }
 	}
 	xmlhttp.open("GET","push_bgg_games.php?username="+username+"&password="+password,true);
 	xmlhttp.send();
