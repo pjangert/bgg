@@ -107,7 +107,7 @@ if ($_SESSION['add_game'])
 ?>
       <form name='add' method='post' action='<?=$_SERVER['PHP_SELF']?>'>
         <tr>
-    <td class='sans'><input name='act' type='hidden' value='add' /><a href='javascript:addUN()'>Add Game</a></td>
+    <td class='sans'><br /><input name='act' type='hidden' value='add' /><a href='javascript:addUN()'>Add Game</a><br /><br /></td>
 <?php
   foreach ($field_list as $curr_field)
     if ($curr_field->name != "game_id" && $curr_field->name != "child_count")
@@ -129,13 +129,13 @@ if (($_SESSION['edit_game'] || $_SESSION['edit_loan']) && $Edit == 'Y' )
   {
     $curr_array = $single_list->fetch_assoc();
     echo "      <tr>\n";
-    echo "        <td class='sans'><a href='javascript:setUpdate2(\"{$curr_array['game_id']}\");'>Update Game</a></td>\n";
+    echo "        <td class='sans'><br /><a href='javascript:setUpdate2(\"{$curr_array['game_id']}\");'>Update Game</a><br /><br /><a href={$_SERVER['PHP_SELF']}>Cancel Update</a</td>\n";
     $curr_rec_edit = true;
     include "includes/show_fields.php";
     $single_list->close();
     echo "      </tr>\n";
     echo "      <tr>\n";
-    echo "        <td class='sans'><a href={$_SERVER['PHP_SELF']}>Cancel Update</a></td>\n";
+    echo "        <td class='sans'>></td>\n";
     echo "      </tr>\n";
   }
 }
@@ -150,10 +150,10 @@ while ($curr_array = $item_list->fetch_assoc())
   echo "      <tr>\n";
   if ($_SESSION['edit_game'] || $_SESSION['edit_loan'])
   {
-    echo "        <td class='sans'><a href='javascript:setUpdate(\"{$curr_array['game_id']}\");'>Edit Game</a>\n";
+    echo "        <td class='sans'><br /><a href='javascript:setUpdate(\"{$curr_array['game_id']}\");'>Edit Game</a>\n";
     if ($_SESSION['edit_game'])
       echo "         <br /><br /><a href='javascript:setDelete(\"{$curr_array['game_id']}\",\"" . htmlspecialchars($curr_array['game_name'],ENT_QUOTES) . "\",\"" . ($curr_array['child_count'] > 0 ? "true" : "false") . "\");'>Delete Game</a>\n";
-    echo "        </td>\n";
+    echo "        <br /><br /></td>\n";
   }
   else
     echo "        <td>&nbsp;</td>\n";

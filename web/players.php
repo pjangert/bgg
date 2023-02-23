@@ -8,16 +8,17 @@ function submitPlayers()
 	workArea=document.getElementById("gameResult");
 	players=document.getElementById("player_count").value;
 	if (players=="") {workArea.innerHTML="Invalid player count"; return;}
-	workArea.innerHTML="Please wait, retrieving results...";
+	workArea.innerHTML="<h3>Please wait, retrieving results...</h3>";
+	start=false;
 	if (window.XMLHttpRequest){ xmlhttp=new XMLHttpRequest();}
 	else { xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); }
 	xmlhttp.onreadystatechange=function() {
 		if (xmlhttp.readyState == 3) {
-			workArea.innerHTML="Loading results...";
+		  workArea.innerHTML="<h3>Loading results...</h3>" + xmlhttp.response;
 		}
 		else if (xmlhttp.readyState == 4) {
-			//document.getElementById("gameResult").innerHTML=xmlhttp.responseText;
-			workArea.innerHTML=xmlhttp.responseText;
+		  if (xmlhttp.status == 200) { workArea.innerHTML="<h3>Results Complete</h3>" + xmlhttp.responseText; }
+			else { workArea.innerHTML="<p class=\"center error\">Error occurred: " + xmlhttp.statusText + "</p>"; }
 		}
 	}
 	xmlhttp.open("GET","game_query.php?players="+players,true);
@@ -34,13 +35,13 @@ if (!$link)
 }
 else
 {
-	$game_count = $link->query("select (select count(*) from game_info) + (select count(*) from expansion_info) as total_games");
+	$game_count = $link->query("select (select count(*) from game_info) as total_games, (select count(*) from expansion_info) as total_exp");
 	if (!$game_count)
 		$db_games = "could not be retrieved: {$link->error}";
 	else
 	{
 		$info = $game_count->fetch_assoc();
-		$db_games = ": {$info['total_games']}";
+		$db_games = ": {$info['total_games']} with {$info['total_exp']} expansions";
 		$game_count->close();
 	}
 }
@@ -51,6 +52,11 @@ else
 <h1>Games by Player Count</h1>
 <h6 class='center'>Games in library <?=$db_games?></h6>
 <p class='center'>Number of players: <input type='number' min=0 max=12 id='player_count' value=2 /> <input type='button' value='Get Games' onClick='submitPlayers();' /></p>
+<script>
+  document.getElementById('player_count').addEventListener("keyup", function(e) {
+    if (e.key === "Enter" ) { e.preventDefault; submitPlayers(); }
+  });
+</script>
 <div class='result'>
 <!--<span class='buffer'>&nbsp;</span><span class='result' id='gameResult'></span> -->
 <span class='buffer'>&nbsp;</span><span class='result' id='gameResult'></span>
