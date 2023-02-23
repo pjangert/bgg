@@ -1,5 +1,6 @@
 <?php
-$ENV_SEC = getenv('ENV_SEC') ?: "/run/secrets/db_env";
+$ENV_SEC_PATH = getenv('ENV_SEC_PATH') ?: "/run/secrets/db_env";
+$ENV_SEC = rtrim($ENV_SEC_PATH, "/") . "/db_env";
 echo "<p>ENV_SEC:{$ENV_SEC}</p>";
 $gamedb="No Match";
 if (preg_match(":gamelib/:", $_SERVER['PHP_SELF']) )
