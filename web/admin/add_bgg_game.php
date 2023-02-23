@@ -12,10 +12,10 @@ $query_func='function submitName()
 	if (window.XMLHttpRequest){ xmlhttp=new XMLHttpRequest(); }
 	else { xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); }
 	xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) { result_location.innerHTML=xmlhttp.responseText; }
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) { result_location.innerHTML="<p class=\"center\">Results Complete</p>" + xmlhttp.responseText; }
 		else if (xmlhttp.readyState==4 && xmlhttp.status!=200) { result_location.innerHTML="<p class=\"center\">Error occurred:"+xmlhttp.statusText+"</p>"; }
 		else if (xmlhttp.readyState==1) { result_location.innerHTML="<p class=\"center\">Query Sent - this will take a moment</p>";}
-		else if (xmlhttp.readyState==3) { result_location.innerHTML="<p class=\"center\">Retrieving Data</p>";}
+		else if (xmlhttp.readyState==3) { result_location.innerHTML="<p class=\"center\">Retrieving Data</p>" + xmlhttp.response;}
 		else { result_location.innerHTML="<p class=\"center\">State: "+xmlhttp.readyState+" received</p>"; }
 	}
 	xmlhttp.open("GET",sendURL,true);
