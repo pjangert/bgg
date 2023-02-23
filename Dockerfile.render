@@ -1,6 +1,8 @@
+# syntax = docker/dockerfile:1.2
 FROM php:7.4-apache
 #Install PHP extensions
 RUN docker-php-ext-install mysqli
 COPY --chown=www-data:www-data ./web/ /var/www/html
-RUN chown www-data:www-data /etc/secrets/db_env
+RUN --mount=type=secret,id=db_env,dst=/etc/secrets/db_env
+RUN source /etc/secrets/db_env
 EXPOSE 80
