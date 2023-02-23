@@ -3,6 +3,10 @@ for SEC_F in db_env db_env_php
 do
   SEC_FILENAME=${SEC_F}
   SEC_FILE=${ENV_SEC_PATH}/${SEC_FILENAME}
-  [ -f "${SEC_FILE}" ] && chown www-data:www-data ${SEC_FILE}
+  if [[ -f "${SEC_FILE}" ]] 
+  then
+    chown www-data:www-data ${SEC_FILE}
+    [[ $? -ne 0 ]] && . ${SEC_FILE}
+  fi
 done
 exec "$@"
