@@ -64,8 +64,6 @@ if (isset($_REQUEST['players']))
     }
     if ($exp_results != null) {echo "</ul>\n";}
     echo "<hr />\n";
-//    ob_flush();
-//    flush();
     
     $detail_result->close();
   }
