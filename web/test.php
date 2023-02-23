@@ -47,6 +47,6 @@ $rw_pw = (! empty($DB_RW_PASS)) ? $DB_RW_PASS : getenv('DB_RW_PASS') ?: "gamerw"
 $db_host = (! empty($DB_ADDRESS)) ? $DB_ADDRESS : getenv('DB_ADDRESS') ?: "localhost";
 $db_port = (! empty($DB_PORT)) ? $DB_PORT : getenv('DB_PORT') ?: 3306;
 
-ENV_RW_PASS = getenv('DB_RW_PASS');
+$ENV_RW_PASS = getenv('DB_RW_PASS');
 echo "DB_RW_PASS='{$DB_RW_PASS}' env DB_RW_PASS='{$ENV_RW_PASS)' rw_pw='{$rw_pw}'";
 ?>
