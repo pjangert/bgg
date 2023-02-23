@@ -38,14 +38,15 @@ echo "<p> ARR0='{$ENV_ARR[0]}' ARR1='{$ENV_ARR[1]}'</p>";
     }
   }
 }
-$gamedb = $DB_ENV ?: getenv('DB_ENV') ?: $hold_db;
+$gamedb = (! empty($DB_ENV)) ? $DB_ENV : getenv('DB_ENV') ?: $hold_db;
 
-$ro_login = $DB_RO_USER ?: getenv('DB_RO_USER') ?: "game_query";
-$ro_pw = $DB_RO_PASS ?: getenv('DB_RO_PASS') ?: "gamero";
-$rw_login = $DB_RW_USER ?: getenv('DB_RW_USER') ?: "game_admin";
-$rw_pw = $DB_RW_PASS ?: getenv('DB_RW_PASS') ?: "gamerw";
-$db_host = $DB_ADDRESS ?: getenv('DB_ADDRESS') ?: "localhost";
-$db_port = $DB_PORT ?: getenv('DB_PORT') ?: 3306;
+$ro_login = (! empty($DB_RO_USER)) ? $DB_RO_USER : getenv('DB_RO_USER') ?: "game_query";
+$ro_pw = (! empty($DB_RO_PASS)) ? $DB_RO_PASS : getenv('DB_RO_PASS') ?: "gamero";
+$rw_login = (! empty($DB_RW_USER)) ? $DB_RW_USER : getenv('DB_RW_USER') ?: "game_admin";
+$rw_pw = (! empty($DB_RW_PASS)) ? $DB_RW_PASS : getenv('DB_RW_PASS') ?: "gamerw";
+$db_host = (! empty($DB_ADDRESS)) ? $DB_ADDRESS : getenv('DB_ADDRESS') ?: "localhost";
+$db_port = (! empty($DB_PORT)) ? $DB_PORT : getenv('DB_PORT') ?: 3306;
 
-echo "DB_RW_PASS='{$DB_RW_PASS}' rw_pw='{$rw_pw}'";
+ENV_RW_PASS = getenv('DB_RW_PASS');
+echo "DB_RW_PASS='{$DB_RW_PASS}' env DB_RW_PASS='{$ENV_RW_PASS)' rw_pw='{$rw_pw}'";
 ?>
