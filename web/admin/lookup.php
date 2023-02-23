@@ -1,21 +1,23 @@
 <?php
   require_once "includes/common.php";
   require_once "includes/dbinfo.php";
+
+  ob_implicit_flush(true);
   start_page();
   $bgg_url = "http://www.boardgamegeek.com/xmlapi2/";
   $query = $_REQUEST['game_name'];
-  $exact = (isset($_REQUEST['exact'])) ? "&exact=1" : "";
+  $exact = (!empty($_REQUEST['exact'])) ? "&exact=1" : "";
   $show_pics = $_REQUEST['show_pics'];
   $load_fail = 0;
   debug_show(1, "Request vars: game_name: '{$_REQUEST['game_name']}' exact: '{$_REQUEST['exact']}' show_pics: '${_REQUEST['show_pics']}'");
   $query_string=urlencode($bgg_url."search?query=".$query."&type=boardgame{$exact}");
   debug_show(1, "query_string={$query_string}");
   date_default_timezone_set("America/New_York");
-  $xml_start_time = date("H:i:s");
+  $xml_start_time = new DateTime();
   $game_response = simplexml_load_file($query_string) or $load_fail = 1;
-  $xml_end_time = date("H:i:s");
+  $xml_elapsed = $xml_start_time->diff(new DateTime());
   $link = new mysqli($db_host, $ro_login, $ro_pw, $gamedb, $db_port);
-  debug_show(2, var_export($game_response, true));
+  debug_show(3, var_export($game_response, true));
   if ($load_fail != 0)
   {
     echo "    <h2>Error Occurred</h2>\n";
@@ -30,7 +32,7 @@
     if (!$link) {echo "<p>Unable to connect to database - some results may show the ability to add existing entries</p>\n";}
     echo "    <h2>Results</h2>\n";
     echo "    <p>Total found: {$results}</p>\n";
-    debug_show(1, "Main query: {$xml_start_time} - {$xml_end_time}");
+    debug_show(2, "Main query: {$xml_elapsed->format('%s.%F s')}");
     debug_show(1, "show_pics={$show_pics} -- number of results: {$results}");
     for ($i=0;$i<$results;$i++)
     {
@@ -118,7 +120,9 @@
         $game_check = $result->fetch_assoc();
       if (isset($result) && $game_check['bgg_id'] != null) { echo "<p>Already in database</p>\n"; $result->close(); }
       else { echo "<p><a href=\"insert_{$parent}.php?{$params}\">Insert Record</a></p>\n"; }
-      debug_show(2,"<p>Times: ". sprintf("get XML: %f, search XML: %f",$xml_end_time - $xml_start_time, $proc_end_time - $proc_start_time) ."</p>");
+      $xml_elapsed = $xml_end_time - $xml_start_time;
+      $proc_elapsed = $proc_end_time - $proc_start_time;
+      debug_show(2,"<p>Times: ". "get XML: {$xml_elapsed}s, search XML: ${proc_elapsed}s");
     }
   }
   end_page();
