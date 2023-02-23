@@ -1,5 +1,8 @@
 #!/bin/sh
-SEC_FILENAME=db_env
-SEC_FILE=${ENV_SEC_PATH}/${SEC_FILENAME}
-[ -f "${SEC_FILE}" ] && . ${SEC_FILE}
+for SEC_F in db_env db_env_php
+do
+  SEC_FILENAME=${SEC_F}
+  SEC_FILE=${ENV_SEC_PATH}/${SEC_FILENAME}
+  [ -f "${SEC_FILE}" ] && chown www-data:www-data ${SEC_FILE}
+done
 exec "$@"
