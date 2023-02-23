@@ -1,5 +1,5 @@
 #!/bin/sh
 SEC_FILENAME=db_env
 SEC_FILE=${ENV_SEC_PATH}/${SEC_FILENAME}
-[ -f "${SEC_FILENAME}" ] && . ${SEC_FILENAME}
+[ -f "${SEC_FILE}" ] && . ${SEC_FILE}
 exec "$@"

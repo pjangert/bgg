@@ -1,6 +1,6 @@
 <?php
 $ENV_SEC_PATH = getenv('ENV_SEC_PATH') ?: "/run/secrets/db_env";
-$ENV_SEC = rtrim($ENV_SEC_PATH, "/") . "/db_env";
+$ENV_SEC = rtrim($ENV_SEC_PATH, "/") . "/db_env_php";
 echo "<p>ENV_SEC:{$ENV_SEC}</p>";
 $info = stat($ENV_SEC);
 echo "<p>" . var_export($info, true) . "</p>";
@@ -48,5 +48,5 @@ $db_host = (! empty($DB_ADDRESS)) ? $DB_ADDRESS : getenv('DB_ADDRESS') ?: "local
 $db_port = (! empty($DB_PORT)) ? $DB_PORT : getenv('DB_PORT') ?: 3306;
 
 $ENV_RW_PASS = getenv('DB_RW_PASS');
-echo "DB_RW_PASS='{$DB_RW_PASS}' env DB_RW_PASS='{$ENV_RW_PASS)' rw_pw='{$rw_pw}'";
+echo "DB_RW_PASS='{$DB_RW_PASS}' env DB_RW_PASS='{$ENV_RW_PASS}' rw_pw='{$rw_pw}'";
 ?>
