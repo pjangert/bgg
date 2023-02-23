@@ -1,0 +1,6 @@
+FROM php:7.4-apache
+#Install PHP extensions
+RUN docker-php-ext-install mysqli
+COPY --chown=www-data:www-data ./web/ /var/www/html
+RUN chown www-data:www-data /etc/secrets/db_env
+EXPOSE 80
