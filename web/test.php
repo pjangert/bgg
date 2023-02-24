@@ -40,7 +40,7 @@ echo "<p> ARR0='{$ENV_ARR[0]}' ARR1='{$ENV_ARR[1]}'</p>";
 }
 else
 {
-  if (file_exists($ENV_SEC)
+  if (file_exists($ENV_SEC))
     echo "Cannot read {$ENV_SEC}";
   else
     echo "{$ENV_SEC} not found";
