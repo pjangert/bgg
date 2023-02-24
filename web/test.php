@@ -22,7 +22,7 @@ else
 	}
 }
 $hold_db = $gamedb;
-if (file_exists($ENV_SEC))
+if (is_readable($ENV_SEC))
 {
   echo "Found file";
   foreach(file($ENV_SEC, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $dummy => $ENV_LINE)
@@ -38,6 +38,13 @@ echo "<p> ARR0='{$ENV_ARR[0]}' ARR1='{$ENV_ARR[1]}'</p>";
     }
   }
 }
+else
+{
+  if (file_exists($ENV_SEC)
+    echo "Cannot read {$ENV_SEC}";
+  else
+    echo "{$ENV_SEC} not found";
+}
 $gamedb = (! empty($DB_ENV)) ? $DB_ENV : getenv('DB_ENV') ?: $hold_db;
 
 $ro_login = (! empty($DB_RO_USER)) ? $DB_RO_USER : getenv('DB_RO_USER') ?: "game_query";
@@ -48,5 +55,5 @@ $db_host = (! empty($DB_ADDRESS)) ? $DB_ADDRESS : getenv('DB_ADDRESS') ?: "local
 $db_port = (! empty($DB_PORT)) ? $DB_PORT : getenv('DB_PORT') ?: 3306;
 
 $ENV_RW_PASS = getenv('DB_RW_PASS');
-echo "DB_RW_PASS='{$DB_RW_PASS}' env DB_RW_PASS='{$ENV_RW_PASS}' rw_pw='{$rw_pw}'";
+echo "DB_RO_USER='{$DB_RO_USER}' env DB_RO_USER='{$ENV_RO_USER}' ro_pw='{$ro_pw}'";
 ?>
