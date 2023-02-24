@@ -55,7 +55,7 @@ echo "      <tr>\n";
 echo "      <form name='change' method='post' action='exp_maint.php'>\n";
 echo "      <input type='hidden' name='exp_id' value='{$_REQUEST['exp_id']}' />\n";
 echo "      <input type='hidden' name='act' value='{$act}' />\n";
-debug_show(1, var_export($curr_array, true); }
+debug_show(1, var_export($curr_array, true));
 foreach ($curr_array as $tfield)
 {
   debug_show(2, var_export($tfield, true); }
