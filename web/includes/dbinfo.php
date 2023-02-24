@@ -19,7 +19,7 @@ else
 	}
 }
 $hold_db = $gamedb;
-if (file_exists($ENV_SEC))
+if (is_readable($ENV_SEC))
 {
   foreach(file($ENV_SEC, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $dummy => $ENV_LINE)
   {
