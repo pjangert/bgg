@@ -26,7 +26,7 @@ td { background: transparent; color: #A0A0A0; margin: 0pt; padding: 0pt 2pt; bor
 tr { text-align: center; vertical-align: middle; margin: 0pt; padding: 0pt; border: 0pt; margin-top: 1ex; }
 hr { color: #BBBBBB; background-color: #BBBBBB; height: 2px; margin: 1ex 1em 1ex 1em; border: none; }
 div { padding: 0; margin: 0; border: 0; /*display: table;*/ }
-div.result { align: center; text-align: center; }
+div.result { align: center; text-align: center; color: #B0B0B0; }
 div.center_text { text-align: center; }
 div.center { align: center; }
 div.center table { margin: 0 auto; }
@@ -39,5 +39,5 @@ span.red { color: #CC0000; }
 span.result { width: 80%; align: center; float: left; }
 /*span.result { width: 100%; text-align: center; float: left; }*/
 span.buffer { width: 10%; text-align: center; float: left; }
-span p,p.indented { font: 100% Arial, sans-serif; color: #A0A0A0; padding-left: 2em; }
+span p,p.indented { font: 100% Arial, sans-serif; color: #D00020; padding-left: 2em; }
 div.updated { margin-bottom: 0em; padding: 0em; /*clear: both;*/ }
